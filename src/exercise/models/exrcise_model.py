@@ -8,7 +8,7 @@ import secrets
 
 # Create your models here.
 class ExerciseModel(NamedDateTimeModel):
-    level = models.CharField(max_length=10, choices=LevelEnum.choices, default=LevelEnum.BEGINER,
+    level = models.CharField(max_length=15, choices=LevelEnum.choices, default=LevelEnum.BEGINER,
                              verbose_name="Niveau ")
     target_area = models.CharField(max_length=10, choices=TargetAreaEnum.choices, default=TargetAreaEnum.ARM,
                                    verbose_name="Zone ciblée ")
