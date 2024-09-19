@@ -89,8 +89,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'fitness_db',
-        'USER': 'root',
-        'PASSWORD': '',
+        'USER': 'tian',
+        'PASSWORD': 'root',
         'HOST': 'localhost',
         'PORT': '3306',
 

@@ -2,10 +2,13 @@ from django.urls import path, include, re_path
 from rest_framework import routers, permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-from .viewsets.exercise_viewset import ExerciseViewSet
+
+from .viewsets import exercise_viewset, program_viewset
 
 router = routers.DefaultRouter()
-router.register(r'exercises', ExerciseViewSet)
+router.register(r'exercises', exercise_viewset.ExerciseViewSet)
+router.register(r'programs', program_viewset.ProgramViewSet)
+
 
 schema_view = get_schema_view(
    openapi.Info(
