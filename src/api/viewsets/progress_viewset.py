@@ -9,6 +9,7 @@ from progress.models.progress_model import ProgressModel
 from ..serializers.progress_serializer import ProgressSerializer
 from user.models.custom_user_model import CustomUserModel  
 
+
 class ProgressViewSet(viewsets.ModelViewSet):
 
     queryset = ProgressModel.objects.all()
@@ -23,14 +24,14 @@ class ProgressViewSet(viewsets.ModelViewSet):
 
     def calculate_bmi(self, weight, size):
 
-        height_in_meters = size / 100  # Convertir la taille en mètres
+        height_in_meters = size / 100 
         if height_in_meters > 0:
             bmi = weight / (height_in_meters ** 2)
             return round(bmi, 2)
         return None
 
     def calculate_performance_score(self, bmi, total_sessions, avg_performance_notes):
-      
+
         score = 0
         
         # Calcul basé sur l'IMC
@@ -45,14 +46,15 @@ class ProgressViewSet(viewsets.ModelViewSet):
         if total_sessions < 5:
             score -= 10  
         elif total_sessions >= 5:
-            score += 10 
+            score += 10  
 
-        # Calcul basé sur la performance moyenne
+        # Calcul basé sur la performance moyenne (notes)
         if avg_performance_notes:
             if avg_performance_notes >= 50:
                 score += 10  
             else:
                 score -= 5  
+
         return score
 
     @action(detail=False, methods=['get'])
@@ -80,7 +82,7 @@ class ProgressViewSet(viewsets.ModelViewSet):
         # Calculer l'IMC de l'utilisateur
         bmi = self.calculate_bmi(weight, size)
 
-        # Filtrer les progrès récents sur 30 jours
+        # Filtrer les progrès récents sur les 30 derniers jours
         last_30_days = now().date() - timedelta(days=30)
         recent_progress = progress_queryset.filter(date__gte=last_30_days)
 
@@ -107,4 +109,5 @@ class ProgressViewSet(viewsets.ModelViewSet):
             "total_sessions": total_sessions,
             "avg_performance_notes": avg_performance_notes,
         })
+
 

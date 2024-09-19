@@ -4,8 +4,13 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from .viewsets.progress_viewset import ProgressViewSet
 
+from .viewsets import exercise_viewset, program_viewset, custom_user_viewset
+
 router = routers.DefaultRouter()
-router.register(r'progress', ProgressViewSet)
+router.register(r'exercises', exercise_viewset.ExerciseViewSet)
+router.register(r'programs', program_viewset.ProgramViewSet)
+router.register(r'progress', ProgressViewSet, basename='progress')
+router.register('users', custom_user_viewset.CustomUserViewSet, basename='users')
 
 schema_view = get_schema_view(
    openapi.Info(

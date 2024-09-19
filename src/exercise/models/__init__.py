@@ -1,1 +1,1 @@
-from . import exrcise_model
+from . import exercise_model
