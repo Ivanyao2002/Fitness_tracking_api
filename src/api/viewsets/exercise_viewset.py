@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 from ..serializers.exercise_serializer import ExerciseSerializer
-from exercise.models.exrcise_model import ExerciseModel
+from exercise.models.exercise_model import ExerciseModel
 from rest_framework import status
 from rest_framework.response import Response
 

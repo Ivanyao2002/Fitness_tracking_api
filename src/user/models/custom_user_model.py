@@ -1,14 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.text import slugify
+from django.core.validators import MinValueValidator, MaxValueValidator
 import secrets
 
 
 # Create your models here.
 class CustomUserModel(AbstractUser):
-    weight = models.PositiveIntegerField(verbose_name="Poids ")
-    size = models.PositiveIntegerField(verbose_name="Taille ")
-    age = models.PositiveIntegerField(verbose_name="Age ")
+    weight = models.PositiveIntegerField(verbose_name="Poids ", validators=[MinValueValidator(30), MaxValueValidator(300)])
+    size = models.PositiveIntegerField(verbose_name="Taille ", validators=[MinValueValidator(100), MaxValueValidator(250)])
+    age = models.PositiveIntegerField(verbose_name="Age ", validators=[MinValueValidator(16), MaxValueValidator(90)])
     numbers = models.CharField(max_length=15, verbose_name="Numéros de téléphone ")
     slug = models.SlugField(unique=True)
 

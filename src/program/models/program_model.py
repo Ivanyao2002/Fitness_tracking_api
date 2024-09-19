@@ -1,6 +1,6 @@
 from django.db import models
 from base.models.helpers.date_time_model import DateTimeModel
-from base.models.target_area_ennum import TargetAreaEnum
+from base.models.level_ennum import LevelEnum
 from django.utils.text import slugify
 import secrets
 
@@ -8,21 +8,24 @@ import secrets
 # Create your models here.
 class ProgramModel(DateTimeModel):
 
-    target_area = models.CharField(max_length=10, choices=TargetAreaEnum.choices, default=TargetAreaEnum.ARM,
-                                   verbose_name="Zone ciblée ")
     user = models.ForeignKey("user.CustomUserModel", on_delete=models.CASCADE,
                              verbose_name="Nom d'utilisateur ")
-    exercices = models.ManyToManyField("exercise.ExerciseModel", verbose_name="Exercices ")
-    starting = models.DateField(verbose_name="Date de début ")
-    ending = models.DateField(verbose_name="Date de fin ")
+    level = models.CharField(max_length=15, choices=LevelEnum.choices, default=LevelEnum.BEGINER,
+                             verbose_name="Niveau ")
+    routine = models.ManyToManyField("program.RoutineModel", verbose_name="Nom de la routine ")
+    sets = models.PositiveIntegerField(verbose_name="Séries par semaine")
+    starting = models.TimeField(verbose_name="Heure de début ")
     slug = models.SlugField(unique=True)
 
+    @property
     def program_duration(self):
-        duration = self.ending - self.starting
-        return duration.days
+        if self.ending < self.starting:
+            duration = self.ending - self.starting
+            return duration.days
+        return 0
 
     def __str__(self):
-        return f"{self.user} - {self.program_duration()} jours, {self.target_area}"
+        return f"{self.user} - {self.routine}"
 
     class Meta:
         verbose_name = "Programme"

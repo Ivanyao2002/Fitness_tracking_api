@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from exercise.models.exrcise_model import ExerciseModel
+from exercise.models.exercise_model import ExerciseModel
 
 
 class ExerciseSerializer(serializers.ModelSerializer):

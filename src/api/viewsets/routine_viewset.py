@@ -1,14 +1,13 @@
 from rest_framework import viewsets
-from ..serializers.program_serializer import ProgramSerializer
-from program.models.program_model import ProgramModel
+from ..serializers.routine_serializer import RoutineSerializer
 from program.models.routine_model import RoutineModel
 from rest_framework import status
 from rest_framework.response import Response
 
 
-class ProgramViewSet(viewsets.ModelViewSet):
-    queryset = ProgramModel.objects.all()
-    serializer_class = ProgramSerializer
+class RoutineViewSet(viewsets.ModelViewSet):
+    queryset = RoutineModel.objects.all()
+    serializer_class = RoutineSerializer
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()

@@ -7,25 +7,24 @@ import secrets
 
 
 # Create your models here.
-class ExerciseModel(NamedDateTimeModel):
+class RoutineModel(NamedDateTimeModel):
     level = models.CharField(max_length=15, choices=LevelEnum.choices, default=LevelEnum.BEGINER,
                              verbose_name="Niveau ")
     target_area = models.CharField(max_length=10, choices=TargetAreaEnum.choices, default=TargetAreaEnum.ARM,
                                    verbose_name="Zone ciblée ")
-    duration = models.PositiveIntegerField(verbose_name="Durée ", blank=True, null=True)
-    repetition = models.PositiveIntegerField(verbose_name="Répétition ", blank=True, null=True)
-    description = models.TextField(verbose_name="Description ")
+
+    exercices = models.ManyToManyField("exercise.ExerciseModel", verbose_name="Exercices ")
     slug = models.SlugField(unique=True)
 
     def __str__(self):
-        return f"{self.name} - {self.level}"
+        return f"{self.name} - {self.level} jours, {self.target_area}"
 
     class Meta:
-        verbose_name = "Exercice"
-        verbose_name_plural = "Exercices"
+        verbose_name = "Routine"
+        verbose_name_plural = "Routines"
 
     def save(self, *args, **kwargs):
         if not self.id:
             self.slug = slugify(secrets.token_urlsafe(8))
 
-        super(ExerciseModel, self).save(*args, **kwargs)
+        super(RoutineModel, self).save(*args, **kwargs)
