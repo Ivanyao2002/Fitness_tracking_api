@@ -1,6 +1,5 @@
 from rest_framework import viewsets
-
-from api.serializers.exercise_serializer import ExerciseSerializer
+from ..serializers.exercise_serializer import ExerciseSerializer
 from exercise.models.exrcise_model import ExerciseModel
 
 class ExerciseViewSet(viewsets.ModelViewSet):

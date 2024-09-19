@@ -87,12 +87,12 @@ WSGI_APPLICATION = 'fitness_app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'fitness_db',
-        'USER': 'tian',
+        'USER': 'postgres',
         'PASSWORD': 'root',
         'HOST': 'localhost',
-        'PORT': '3306',
+        'PORT': '5432',
 
     }
 }
