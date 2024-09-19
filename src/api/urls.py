@@ -3,7 +3,17 @@ from rest_framework import routers, permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
+from .viewsets.program_viewset import ProgramViewSet
+from .viewsets.progress_viewset import ProgressViewSet
+from .viewsets.exercise_viewset import ExerciseViewSet
+from .viewsets.custom_user_viewset import CustomerUserViewSet
+
+
 router = routers.DefaultRouter()
+router.register(r'custommerusers',CustomerUserViewSet)
+router.register(r'programs',ProgramViewSet)
+router.register(r'exercise',ExerciseViewSet)
+router.register(r'progress',ProgressViewSet)
 
 schema_view = get_schema_view(
    openapi.Info(
