@@ -2,8 +2,10 @@ from django.urls import path, include, re_path
 from rest_framework import routers, permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from .viewsets import  custom_user_viewset
 
 router = routers.DefaultRouter()
+router.register('users', custom_user_viewset.CustomUserViewSet, basename='users')
 
 schema_view = get_schema_view(
    openapi.Info(
